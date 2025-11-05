@@ -271,9 +271,29 @@ document.addEventListener("DOMContentLoaded",()=>{
       }
     }
 
-    document.querySelectorAll("#mazeControls button").forEach(btn=>{
-      btn.addEventListener("click",()=>move(btn.dataset.dir));
-    });
+    // 🧭 Mobile controls with hold-to-move support
+document.querySelectorAll("#mazeControls button").forEach(btn=>{
+  let interval;
+  const dir = btn.dataset.dir;
+
+  const startMove = () => {
+    move(dir);
+    interval = setInterval(() => move(dir), 120); // speed: smaller = faster
+  };
+
+  const stopMove = () => clearInterval(interval);
+
+  // For phones/tablets (touch)
+  btn.addEventListener("touchstart", startMove);
+  btn.addEventListener("touchend", stopMove);
+  btn.addEventListener("touchcancel", stopMove);
+
+  // For desktop (mouse)
+  btn.addEventListener("mousedown", startMove);
+  btn.addEventListener("mouseup", stopMove);
+  btn.addEventListener("mouseleave", stopMove);
+});
+
 
     document.addEventListener("keydown",key);
     draw();
@@ -296,8 +316,23 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 
   function song(){
-    const a=new Audio("music.mp3"); // replace with your file
-    a.loop=true;a.volume=0.3;
+    const a=new Audio("George Michael - Careless Whisper (Official Video)"); // replace with your file
+    a.loop=true;a.volume=0.3;audio.volume = 0;
+  let vol = 0;
+
+  const fadeIn = setInterval(() => {
+    if(vol < 0.5){ vol += 0.02; audio.volume = vol; }
+    else clearInterval(fadeIn);
+  }, 200);
+
+  audio.play().catch(() => {
+    console.log("Autoplay blocked — waiting for click...");
+  });
+
+  document.addEventListener("click", () => {
+    audio.play().catch(() => {});
+  }, { once: true });
+
     document.addEventListener("click",()=>a.play(),{once:true});
   }
 
@@ -312,3 +347,5 @@ document.addEventListener("DOMContentLoaded",()=>{
   </script>
 </body>
 </html>
+
+
