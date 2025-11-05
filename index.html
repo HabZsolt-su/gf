@@ -316,8 +316,9 @@ document.querySelectorAll("#mazeControls button").forEach(btn=>{
   }
 
   function song(){
-    const a=new Audio("George Michael - Careless Whisper (Official Video)"); // replace with your file
-    a.loop=true;a.volume=0.3;audio.volume = 0;
+  const audio = new Audio("care.mp3");
+  audio.loop = true;
+  audio.volume = 0;
   let vol = 0;
 
   const fadeIn = setInterval(() => {
@@ -332,9 +333,8 @@ document.querySelectorAll("#mazeControls button").forEach(btn=>{
   document.addEventListener("click", () => {
     audio.play().catch(() => {});
   }, { once: true });
+}
 
-    document.addEventListener("click",()=>a.play(),{once:true});
-  }
 
   function time(){
     const s=new Date("2024-11-19T00:00:00"),n=new Date(),d=n-s;
@@ -347,5 +347,7 @@ document.querySelectorAll("#mazeControls button").forEach(btn=>{
   </script>
 </body>
 </html>
+
+
 
 
