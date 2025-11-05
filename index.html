@@ -43,7 +43,6 @@
           Yes 💖
         </button>
 
-        <!-- NO BUTTON -->
         <button id="noPlay"
           class="font-bold py-2 px-6 rounded-full shadow-md absolute"
           style="background-color:#d1d5db;color:#111;left:70%;top:50%;transform:translateY(-50%);z-index:9999;opacity:1;">
@@ -54,9 +53,22 @@
   </div>
 
   <!-- MAZE -->
-  <div id="mazeGame" class="fixed inset-0 bg-purple-100 z-50 hidden flex items-center justify-center">
+  <div id="mazeGame" class="fixed inset-0 bg-purple-100 z-50 hidden flex flex-col items-center justify-center">
     <canvas id="mazeCanvas" width="400" height="400"
             class="border-4 border-pink-400 rounded-2xl shadow-lg"></canvas>
+
+    <!-- Mobile Controls -->
+    <div id="mazeControls" class="mt-6 grid grid-cols-3 gap-3 md:hidden">
+      <div></div>
+      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="up">⬆️</button>
+      <div></div>
+      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="left">⬅️</button>
+      <div></div>
+      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="right">➡️</button>
+      <div></div>
+      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="down">⬇️</button>
+      <div></div>
+    </div>
   </div>
 
   <!-- MAIN PAGE -->
@@ -81,28 +93,28 @@
           <img src="firstdate.JPEG" class="w-full h-full object-cover" />
         </div>
         <h3 class="text-xl font-bold text-pink-500 mb-2">Our First Date</h3>
-        <p class="text-gray-700">Remember when we went to pécs for our "first" date and got the tradition of the Flying tiger.</p>
+        <p class="text-gray-700">Remember when we went to Pécs for our "first" date and got the tradition of the Flying Tiger.</p>
       </div>
       <div class="bg-pink-100 p-4 rounded-xl shadow-md border-4 border-dashed border-purple-200">
         <div class="h-64 bg-yellow-200 rounded-lg mb-3 overflow-hidden">
           <img src="firstVac.JPEG" class="w-full h-full object-cover" />
         </div>
         <h3 class="text-xl font-bold text-purple-500 mb-2">Our First Trip</h3>
-        <p class="text-gray-700">We had so much fun when decided to go stargazing and didn't see any so we played a game so none of us falls asleep.</p>
+        <p class="text-gray-700">We had so much fun when we decided to go stargazing and didn’t see any, so we played a game so none of us fell asleep.</p>
       </div>
       <div class="bg-purple-100 p-4 rounded-xl shadow-md border-4 border-dashed border-yellow-200">
         <div class="h-64 bg-pink-200 rounded-lg mb-3 overflow-hidden">
           <img src="myfav.JPEG" class="w-full h-full object-cover" />
         </div>
-        <h3 class="text-xl font-bold text-yellow-500 mb-2">My Favorite Pictuer Of Us</h3>
-        <p class="text-gray-700">I'll never forget this was the first time you met my grandmother.</p>
+        <h3 class="text-xl font-bold text-yellow-500 mb-2">My Favorite Picture Of Us</h3>
+        <p class="text-gray-700">I'll never forget — this was the first time you met my grandmother.</p>
       </div>
       <div class="bg-yellow-100 p-4 rounded-xl shadow-md border-4 border-dashed border-pink-200">
         <div class="h-64 bg-purple-200 rounded-lg mb-3 overflow-hidden">
           <img src="Batman.JPEG" class="w-full h-full object-cover" />
         </div>
         <h3 class="text-xl font-bold text-pink-500 mb-2">The Impostor</h3>
-        <p class="text-gray-700">You and Me and My Impostor</p>
+        <p class="text-gray-700">You and Me and My Impostor 💞</p>
       </div>
     </div>
 
@@ -136,9 +148,9 @@
       <p class="text-pink-600 font-bold">Made with love for the most amazing girlfriend in the world!</p>
       <p class="text-purple-500 mt-4 text-lg">❤️ Forever and Always ❤️</p>
     </footer>
-    </div>
+  </div>
 
- <script>
+  <script>
 function dateInputKeydown(e){
   if([46,8,9,27,13].includes(e.keyCode))return;
   if((e.keyCode<48||e.keyCode>57)&&(e.keyCode<96||e.keyCode>105))e.preventDefault();
@@ -156,9 +168,8 @@ document.addEventListener("DOMContentLoaded",()=>{
   const noBtn=document.getElementById("noPlay");
   const box=document.getElementById("questionBox");
   let noButtonActivated=false;
-  let canJump=true; // cooldown flag
+  let canJump=true;
 
-  // Check date login
   window.checkDate=function(){
     const v=document.getElementById("dateInput").value.trim();
     if(v==="2024 11 19"){
@@ -167,7 +178,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     }else alert("Oops! That’s not our special date 💕");
   };
 
-  // Activate run-away mode on first click
   noBtn.addEventListener("click",()=>{
     if(!noButtonActivated){
       noButtonActivated=true;
@@ -175,28 +185,21 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   });
 
-  // Mouse tracking for run-away mode
   box.addEventListener("mousemove",e=>{
     if(!noButtonActivated || !canJump) return;
-
     const r=noBtn.getBoundingClientRect();
-    const dist=Math.hypot(
-      e.clientX-(r.left+r.width/2),
-      e.clientY-(r.top+r.height/2)
-    );
-
-    if(dist<100){ // how close before it jumps
-      canJump=false;     // disable new jumps briefly
-      jumpFar();         // make it jump
-      setTimeout(()=>canJump=true,400); // 0.4s cooldown
+    const dist=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));
+    if(dist<100){
+      canJump=false;
+      jumpFar();
+      setTimeout(()=>canJump=true,400);
     }
   });
 
-  // Make the "No" button jump far
   function jumpFar(){
     const b=box.getBoundingClientRect();
     const r=noBtn.getBoundingClientRect();
-    const jumpFactor=3; // ✨ adjust how far it jumps (1 = normal, 3 = far)
+    const jumpFactor=3;
     const L=Math.random()*(b.width*jumpFactor - r.width);
     const T=Math.random()*(b.height*jumpFactor - r.height);
     Object.assign(noBtn.style,{
@@ -208,50 +211,31 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   }
 
-  // When "Yes" clicked → start maze
   yesBtn.addEventListener("click",()=>{
     document.getElementById("miniGameModal").classList.add("hidden");
     document.getElementById("mazeGame").classList.remove("hidden");
-+    initMaze();
+    initMaze();
   });
 
-  // Maze logic
   function initMaze(){
     const c=document.getElementById("mazeCanvas");
     const ctx=c.getContext("2d");
     const p={x:10,y:10,size:20},goal={x:370,y:370,size:20};
-    const walls = [
-        // outer frame
-        [0, 0, 400, 10], [0, 0, 10, 400],
-        [390, 0, 10, 400], [0, 390, 400, 10],
-
-        // horizontal segments (inner maze)
-        [40, 50, 60, 10], [120, 50, 100, 10],
-        [260, 50, 100, 10],
-        [10, 110, 130, 10], [180, 110, 70, 10],
-        [280, 110, 80, 10],
-        [60, 170, 130, 10], [240, 170, 60, 10],
-        [320, 170, 70, 10],
-        [20, 230, 70, 10], [120, 230, 100, 10],
-        [250, 230, 60, 10], [330, 230, 60, 10],
-        [10, 290, 100, 10], [150, 290, 60, 10],
-        [240, 290, 80, 10],
-        [330, 350, 60, 10],
-
-        // vertical segments (inner maze)
-        [60, 10, 10, 40], [140, 10, 10, 50],
-        [220, 10, 10, 100], [300, 10, 10, 50],
-        [360, 10, 10, 50],
-        [100, 60, 10, 30],[180, 60, 10, 50],
-        [260, 60, 10, 100], [340, 60, 10, 50],
-        [60, 120, 10, 60], [140, 100, 10, 60],
-        [220, 120, 10, 60], [300, 120, 10, 60],
-        [100, 180, 10, 60], [180, 180, 10, 60],
-        [260, 180, 10, 60], [340, 180, 10, 60],
-        [60, 240, 10, 60], [140, 220, 10, 60],
-        [210, 240, 10, 60], [300, 240, 10, 60],
-        [100, 300, 10, 60], [180, 300, 10, 60],
-        [260, 300, 10, 60], [340, 300, 10, 60]
+    const walls=[
+      [0,0,400,10],[0,0,10,400],[390,0,10,400],[0,390,400,10],
+      [40,50,60,10],[120,50,100,10],[260,50,100,10],
+      [10,110,130,10],[180,110,70,10],[280,110,80,10],
+      [60,170,130,10],[240,170,60,10],[320,170,70,10],
+      [20,230,70,10],[120,230,100,10],[250,230,60,10],
+      [330,230,60,10],[10,290,100,10],[150,290,60,10],
+      [240,290,80,10],[330,350,60,10],
+      [60,10,10,40],[140,10,10,50],[220,10,10,100],[300,10,10,50],
+      [360,10,10,50],[100,60,10,30],[180,60,10,50],
+      [260,60,10,100],[340,60,10,50],[60,120,10,60],[140,100,10,60],
+      [220,120,10,60],[300,120,10,60],[100,180,10,60],[180,180,10,60],
+      [260,180,10,60],[340,180,10,60],[60,240,10,60],[140,220,10,60],
+      [210,240,10,60],[300,240,10,60],[100,300,10,60],[180,300,10,60],
+      [260,300,10,60],[340,300,10,60]
     ];
 
     function draw(){
@@ -265,31 +249,36 @@ document.addEventListener("DOMContentLoaded",()=>{
       return walls.some(([x,y,w,h])=>nx<x+w&&nx+p.size>x&&ny<y+h&&ny+p.size>y);
     }
 
-    function key(e){
+    function move(dir){
       let nx=p.x,ny=p.y,st=10;
-      if(e.key==="ArrowUp")ny-=st;
-      if(e.key==="ArrowDown")ny+=st;
-      if(e.key==="ArrowLeft")nx-=st;
-      if(e.key==="ArrowRight")nx+=st;
+      if(dir==="up")ny-=st;
+      if(dir==="down")ny+=st;
+      if(dir==="left")nx-=st;
+      if(dir==="right")nx+=st;
       if(!coll(nx,ny)){p.x=nx;p.y=ny;}
+      draw();
       if(p.x>360&&p.y>360){
         document.removeEventListener("keydown",key);
         document.getElementById("mazeGame").classList.add("hidden");
         document.getElementById("mainContent").classList.remove("hidden");
-        confetti();function song(){
-    const a=new Audio("https://www.youtube.com/watch?v=izGwDsrQ1eQ&list=RDizGwDsrQ1eQ&start_radio=1");
-    a.loop=true;a.volume=0.3;
-    document.addEventListener("click",()=>a.play(),{once:true});
-  };setInterval(time,1000);
+        confetti();song();setInterval(time,1000);
       }
-      draw();
     }
+
+    function key(e){
+      if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){
+        move(e.key.replace("Arrow","").toLowerCase());
+      }
+    }
+
+    document.querySelectorAll("#mazeControls button").forEach(btn=>{
+      btn.addEventListener("click",()=>move(btn.dataset.dir));
+    });
 
     document.addEventListener("keydown",key);
     draw();
   }
 
-  // Confetti celebration
   function confetti(){
     const colors=["#FFB6C1","#E6E6FA","#FFFACD","#FFD700","#87CEFA"];
     for(let i=0;i<80;i++){
@@ -306,14 +295,12 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
   }
 
-  // Music
   function song(){
-    const a=new Audio("https://www.youtube.com/watch?v=izGwDsrQ1eQ&list=RDizGwDsrQ1eQ&start_radio=1");
+    const a=new Audio("music.mp3"); // replace with your file
     a.loop=true;a.volume=0.3;
     document.addEventListener("click",()=>a.play(),{once:true});
   }
 
-  // Counter
   function time(){
     const s=new Date("2024-11-19T00:00:00"),n=new Date(),d=n-s;
     document.getElementById("daysCounter").textContent=Math.floor(d/(1000*60*60*24));
@@ -322,7 +309,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     document.getElementById("secondsCounter").textContent=Math.floor(d/1000)%60;
   }
 });
-</script>
-
+  </script>
 </body>
 </html>
