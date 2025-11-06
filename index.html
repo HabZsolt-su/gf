@@ -6,22 +6,34 @@
   <title>Our Love Story ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-color: #ffd6e8; /* pastel pink base */
+    }
+    button {
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+    }
+  </style>
 </head>
 
-<body class="font-[Comic_Neue] bg-pink-50">
+<body class="font-[Comic_Neue]">
 
   <!-- LOGIN -->
-  <div id="accessGate" class="fixed inset-0 bg-pink-300/90 backdrop-blur-sm z-50 flex items-center justify-center">
-    <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md mx-4">
+  <div id="accessGate" class="fixed inset-0 bg-[#ffd6e8]/90 backdrop-blur-sm z-50 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-md mx-4 border-4 border-pink-200">
       <h2 class="text-3xl font-bold text-pink-600 mb-4">Enter Our Anniversary Date</h2>
       <p class="text-gray-700 mb-6">Type in our special date (YYYY MM DD)</p>
       <input id="dateInput" type="text"
-        class="border-2 border-pink-300 rounded-full px-4 py-2 w-full mb-4 text-center text-xl font-bold focus:outline-none focus:ring-2 focus:ring-pink-400"
+        class="border-2 border-pink-300 rounded-full px-4 py-2 w-full mb-4 text-center text-xl font-bold focus:outline-none focus:ring-2 focus:ring-pink-400 bg-[#ffe6f0]"
         placeholder="YYYY MM DD" maxlength="10"
         oninput="formatDateInput(this)" onkeydown="return dateInputKeydown(event)" />
       <button onclick="checkDate()"
         class="font-bold py-3 px-6 rounded-full text-lg shadow-md transition-all"
-        style="background-color:#ec4899;color:white;">
+        style="background-color:#ff91b8;color:white;">
         Enter Our Special Day ❤️
       </button>
     </div>
@@ -29,9 +41,9 @@
 
   <!-- QUESTION -->
   <div id="miniGameModal"
-       class="fixed inset-0 bg-pink-300/90 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
+       class="fixed inset-0 bg-[#ffd6e8]/90 backdrop-blur-sm z-[100] hidden flex items-center justify-center">
     <div id="questionBox"
-         class="relative bg-white p-8 rounded-2xl shadow-xl text-center max-w-md mx-4"
+         class="relative bg-white p-8 rounded-2xl shadow-xl text-center max-w-md mx-4 border-4 border-pink-200"
          style="z-index:200;overflow:visible;">
       <h2 class="text-3xl font-bold text-pink-600 mb-4">A Little Game First 😘</h2>
       <p class="text-gray-700 mb-8">Do you want to play a cute little game with me?</p>
@@ -39,13 +51,13 @@
       <div class="relative flex justify-center gap-6">
         <button id="yesPlay"
           class="font-bold py-2 px-6 rounded-full shadow-md"
-          style="background-color:#ec4899;color:white;z-index:300;left: 20px;">
+          style="background-color:#ff91b8;color:white;z-index:300;">
           Yes 💖
         </button>
 
         <button id="noPlay"
           class="font-bold py-2 px-6 rounded-full shadow-md absolute"
-          style="background-color:#d1d5db;color:#111;left:70%;top:50%;transform:translateY(-50%);z-index:9999;opacity:1;">
+          style="background-color:#ffe6f0;color:#333;left:70%;top:50%;transform:translateY(-50%);z-index:9999;opacity:1;">
           No 😅
         </button>
       </div>
@@ -53,40 +65,41 @@
   </div>
 
   <!-- MAZE -->
-  <div id="mazeGame" class="fixed inset-0 bg-purple-100 z-50 hidden flex flex-col items-center justify-center">
+  <div id="mazeGame" class="fixed inset-0 bg-[#ffd6e8] z-50 hidden flex flex-col items-center justify-center">
     <canvas id="mazeCanvas" width="400" height="400"
-            class="border-4 border-pink-400 rounded-2xl shadow-lg"></canvas>
+            class="border-4 border-[#ff91b8] rounded-2xl shadow-lg bg-[#ffe6f0]"></canvas>
 
     <!-- Mobile Controls -->
     <div id="mazeControls" class="mt-6 grid grid-cols-3 gap-3 md:hidden">
       <div></div>
-      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="up">⬆️</button>
+      <button class="bg-[#ff91b8] text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="up">⬆️</button>
       <div></div>
-      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="left">⬅️</button>
+      <button class="bg-[#ff91b8] text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="left">⬅️</button>
       <div></div>
-      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="right">➡️</button>
+      <button class="bg-[#ff91b8] text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="right">➡️</button>
       <div></div>
-      <button class="bg-pink-400 text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="down">⬇️</button>
+      <button class="bg-[#ff91b8] text-white rounded-full p-4 shadow-md text-2xl font-bold" data-dir="down">⬇️</button>
       <div></div>
     </div>
   </div>
 
   <!-- MAIN PAGE -->
-  <div id="mainContent" class="container mx-auto px-4 py-8 max-w-4xl hidden">
+  <div id="mainContent" class="container mx-auto px-4 py-8 max-w-4xl hidden bg-[#ffd6e8]">
     <header class="text-center mb-12">
-      <h1 class="text-5xl font-bold text-pink-600 mb-4">Happy Anniversary Lia! ❤️</h1>
+      <h1 class="text-5xl font-bold text-pink-600 mb-4">Happy Anniversary My Love! ❤️</h1>
       <div class="animate-bounce text-4xl">🎀</div>
     </header>
 
-    <div class="bg-purple-100 p-6 rounded-2xl shadow-md mb-12 border-4 border-dotted border-pink-300">
-      <h2 class="text-3xl font-bold text-pink-500 mb-4">To My Beautiful Lia</h2>
+    <div class="bg-[#ffe6f0] p-6 rounded-2xl shadow-md mb-12 border-4 border-dotted border-[#ff91b8]">
+      <h2 class="text-3xl font-bold text-pink-500 mb-4">To My Beautiful Princess</h2>
       <p class="text-lg text-gray-800 mb-4">
-        Every moment with you is like a page from the sweetest storybook. You make my life colorful and full of love.
+        Every moment with you is like a page from a sweetest storybook. You make my life colorful and full of love.
       </p>
       <div class="flex justify-center text-4xl">🌸 ✨ 💖</div>
     </div>
 
-    <!-- Memories -->
+    <!-- Memories (unchanged, still pastel) -->
+     <!-- Memories -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
       <div class="bg-yellow-100 p-4 rounded-xl shadow-md border-4 border-dashed border-pink-200">
         <div class="h-64 bg-purple-200 rounded-lg mb-3 overflow-hidden">
@@ -114,13 +127,14 @@
           <img src="Batman.JPEG" class="w-full h-full object-cover" />
         </div>
         <h3 class="text-xl font-bold text-pink-500 mb-2">The Impostor</h3>
-        <p class="text-gray-700">You and Me and My Impostor 💞</p>
+        <p class="text-gray-700">You and Me and My Impostor </p>
       </div>
     </div>
+    <!-- ... keep your memory blocks the same ... -->
 
     <!-- Counter -->
-    <div class="bg-pink-200 p-6 rounded-2xl text-center shadow-md mb-12 border-4 border-dotted border-purple-300">
-      <h2 class="text-3xl font-bold text-purple-600 mb-4">Our Love Timeline</h2>
+    <div class="bg-[#ffe6f0] p-6 rounded-2xl text-center shadow-md mb-12 border-4 border-dotted border-[#ff91b8]">
+      <h2 class="text-3xl font-bold text-pink-600 mb-4">Our Love Timeline</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div class="bg-white p-4 rounded-xl shadow-inner">
           <div id="daysCounter" class="text-4xl font-bold text-pink-500">0</div>
@@ -142,33 +156,25 @@
       <p class="mt-4 text-pink-600 font-medium">Since November 19, 2024 ❤️</p>
       <p class="text-purple-500 text-lg mt-2">To Infinity and Beyond! ✨</p>
     </div>
-
-    <footer class="text-center py-6">
-      <div class="text-4xl mb-4">💖 🎀 🌸</div>
-      <p class="text-pink-600 font-bold">Made with love for the most amazing girlfriend in the world!</p>
-      <p class="text-purple-500 mt-4 text-lg">❤️ Forever and Always ❤️</p>
-    </footer>
   </div>
 
+  <!-- JS -->
   <script>
 function dateInputKeydown(e){
   if([46,8,9,27,13].includes(e.keyCode))return;
   if((e.keyCode<48||e.keyCode>57)&&(e.keyCode<96||e.keyCode>105))e.preventDefault();
 }
-
 function formatDateInput(i){
   let v=i.value.replace(/\D/g,"").substring(0,8);
   if(v.length>4)v=v.substring(0,4)+" "+v.substring(4);
   if(v.length>7)v=v.substring(0,7)+" "+v.substring(7);
   i.value=v;
 }
-
 document.addEventListener("DOMContentLoaded",()=>{
   const yesBtn=document.getElementById("yesPlay");
   const noBtn=document.getElementById("noPlay");
   const box=document.getElementById("questionBox");
-  let noButtonActivated=false;
-  let canJump=true;
+  let noButtonActivated=false,canJump=true;
 
   window.checkDate=function(){
     const v=document.getElementById("dateInput").value.trim();
@@ -178,36 +184,23 @@ document.addEventListener("DOMContentLoaded",()=>{
     }else alert("Oops! That’s not our special date 💕");
   };
 
-  noBtn.addEventListener("click",()=>{
-    if(!noButtonActivated){
-      noButtonActivated=true;
-      jumpFar();
-    }
-  });
-
+  noBtn.addEventListener("click",()=>{if(!noButtonActivated){noButtonActivated=true;jumpFar();}});
   box.addEventListener("mousemove",e=>{
-    if(!noButtonActivated || !canJump) return;
+    if(!noButtonActivated||!canJump)return;
     const r=noBtn.getBoundingClientRect();
     const dist=Math.hypot(e.clientX-(r.left+r.width/2),e.clientY-(r.top+r.height/2));
-    if(dist<100){
-      canJump=false;
-      jumpFar();
-      setTimeout(()=>canJump=true,400);
-    }
+    if(dist<100){canJump=false;jumpFar();setTimeout(()=>canJump=true,400);}
   });
-
   function jumpFar(){
     const b=box.getBoundingClientRect();
     const r=noBtn.getBoundingClientRect();
-    const jumpFactor=3;
-    const L=Math.random()*(b.width*jumpFactor - r.width);
-    const T=Math.random()*(b.height*jumpFactor - r.height);
+    const L=Math.random()*(b.width*3 - r.width);
+    const T=Math.random()*(b.height*3 - r.height);
     Object.assign(noBtn.style,{
       left:Math.min(Math.max(L,0),b.width - r.width)+"px",
       top:Math.min(Math.max(T,0),b.height - r.height)+"px",
       transition:"left 0.25s, top 0.25s",
-      zIndex:9999,
-      opacity:1
+      zIndex:9999
     });
   }
 
@@ -218,123 +211,90 @@ document.addEventListener("DOMContentLoaded",()=>{
   });
 
   function initMaze(){
-    const c=document.getElementById("mazeCanvas");
-    const ctx=c.getContext("2d");
+    const c=document.getElementById("mazeCanvas"),ctx=c.getContext("2d");
     const p={x:10,y:10,size:20},goal={x:370,y:370,size:20};
-    const walls=[
-      [0,0,400,10],[0,0,10,400],[390,0,10,400],[0,390,400,10],
-      [40,50,60,10],[120,50,100,10],[260,50,100,10],
-      [10,110,130,10],[180,110,70,10],[280,110,80,10],
-      [60,170,130,10],[240,170,60,10],[320,170,70,10],
-      [20,230,70,10],[120,230,100,10],[250,230,60,10],
-      [330,230,60,10],[10,290,100,10],[150,290,60,10],
-      [240,290,80,10],[330,350,60,10],
-      [60,10,10,40],[140,10,10,50],[220,10,10,100],[300,10,10,50],
-      [360,10,10,50],[100,60,10,30],[180,60,10,50],
-      [260,60,10,100],[340,60,10,50],[60,120,10,60],[140,100,10,60],
-      [220,120,10,60],[300,120,10,60],[100,180,10,60],[180,180,10,60],
-      [260,180,10,60],[340,180,10,60],[60,240,10,60],[140,220,10,60],
-      [210,240,10,60],[300,240,10,60],[100,300,10,60],[180,300,10,60],
-      [260,300,10,60],[340,300,10,60]
-    ];
+    let finished=false; // ✅ prevent retrigger
+    let moveIntervals=[]; // ✅ store mobile move intervals
+
+    const walls=[[0,0,400,10],[0,0,10,400],[390,0,10,400],[0,390,400,10],
+    [40,50,60,10],[120,50,100,10],[260,50,100,10],[10,110,130,10],[180,110,70,10],
+    [280,110,80,10],[60,170,130,10],[240,170,60,10],[320,170,70,10],[20,230,70,10],
+    [120,230,100,10],[250,230,60,10],[330,230,60,10],[10,290,100,10],[150,290,60,10],
+    [240,290,80,10],[330,350,60,10],[60,10,10,40],[140,10,10,50],[220,10,10,100],
+    [300,10,10,50],[360,10,10,50],[100,60,10,30],[180,60,10,50],[260,60,10,100],
+    [340,60,10,50],[60,120,10,60],[140,100,10,60],[220,120,10,60],[300,120,10,60],
+    [100,180,10,60],[180,180,10,60],[260,180,10,60],[340,180,10,60],[60,240,10,60],
+    [140,220,10,60],[210,240,10,60],[300,240,10,60],[100,300,10,60],[180,300,10,60],
+    [260,300,10,60],[340,300,10,60]];
 
     function draw(){
-      ctx.fillStyle="#E6E6FA";ctx.fillRect(0,0,400,400);
-      ctx.fillStyle="#333";walls.forEach(([x,y,w,h])=>ctx.fillRect(x,y,w,h));
+      ctx.fillStyle="#ffe6f0";ctx.fillRect(0,0,400,400);
+      ctx.fillStyle="#ff91b8";walls.forEach(([x,y,w,h])=>ctx.fillRect(x,y,w,h));
       ctx.fillStyle="#32CD32";ctx.fillRect(goal.x,goal.y,goal.size,goal.size);
       ctx.fillStyle="#FF1493";ctx.fillRect(p.x,p.y,p.size,p.size);
     }
-
-    function coll(nx,ny){
-      return walls.some(([x,y,w,h])=>nx<x+w&&nx+p.size>x&&ny<y+h&&ny+p.size>y);
-    }
-
+    function coll(nx,ny){return walls.some(([x,y,w,h])=>nx<x+w&&nx+p.size>x&&ny<y+h&&ny+p.size>y);}
     function move(dir){
+      if(finished) return; // ✅ stop if already won
       let nx=p.x,ny=p.y,st=10;
-      if(dir==="up")ny-=st;
-      if(dir==="down")ny+=st;
-      if(dir==="left")nx-=st;
-      if(dir==="right")nx+=st;
+      if(dir==="up")ny-=st;if(dir==="down")ny+=st;if(dir==="left")nx-=st;if(dir==="right")nx+=st;
       if(!coll(nx,ny)){p.x=nx;p.y=ny;}
       draw();
-      if(p.x>360&&p.y>360){
+      if(p.x>360&&p.y>360&&!finished){
+        finished=true; // ✅ mark finished
+        // stop all movement intervals
+        moveIntervals.forEach(clearInterval);
         document.removeEventListener("keydown",key);
         document.getElementById("mazeGame").classList.add("hidden");
         document.getElementById("mainContent").classList.remove("hidden");
         confetti();song();setInterval(time,1000);
       }
     }
+    function key(e){if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){move(e.key.replace("Arrow","").toLowerCase());}}
 
-    function key(e){
-      if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].includes(e.key)){
-        move(e.key.replace("Arrow","").toLowerCase());
-      }
-    }
-
-    // 🧭 Mobile controls with hold-to-move support
-document.querySelectorAll("#mazeControls button").forEach(btn=>{
-  let interval;
-  const dir = btn.dataset.dir;
-
-  const startMove = () => {
-    move(dir);
-    interval = setInterval(() => move(dir), 120); // speed: smaller = faster
-  };
-
-  const stopMove = () => clearInterval(interval);
-
-  // For phones/tablets (touch)
-  btn.addEventListener("touchstart", startMove);
-  btn.addEventListener("touchend", stopMove);
-  btn.addEventListener("touchcancel", stopMove);
-
-  // For desktop (mouse)
-  btn.addEventListener("mousedown", startMove);
-  btn.addEventListener("mouseup", stopMove);
-  btn.addEventListener("mouseleave", stopMove);
-});
-
+    // ✅ Mobile controls with hold-to-move fix
+    document.querySelectorAll("#mazeControls button").forEach(btn=>{
+      const dir=btn.dataset.dir;
+      let interval;
+      const startMove=()=>{
+        move(dir);
+        interval=setInterval(()=>move(dir),120);
+        moveIntervals.push(interval);
+      };
+      const stopMove=()=>{
+        clearInterval(interval);
+        moveIntervals=moveIntervals.filter(i=>i!==interval);
+      };
+      btn.addEventListener("touchstart",startMove);
+      btn.addEventListener("touchend",stopMove);
+      btn.addEventListener("touchcancel",stopMove);
+      btn.addEventListener("mousedown",startMove);
+      btn.addEventListener("mouseup",stopMove);
+      btn.addEventListener("mouseleave",stopMove);
+    });
 
     document.addEventListener("keydown",key);
     draw();
   }
 
   function confetti(){
-    const colors=["#FFB6C1","#E6E6FA","#FFFACD","#FFD700","#87CEFA"];
+    const colors=["#ff91b8","#ffe6f0","#ffd6e8","#fff0f5","#fcb6d0"];
     for(let i=0;i<80;i++){
       const d=document.createElement("div");
-      Object.assign(d.style,{
-        position:"fixed",width:"10px",height:"10px",borderRadius:"50%",
-        background:colors[Math.floor(Math.random()*colors.length)],
-        left:Math.random()*100+"vw",top:"-10px",zIndex:"9999"
-      });
+      Object.assign(d.style,{position:"fixed",width:"10px",height:"10px",borderRadius:"50%",background:colors[Math.floor(Math.random()*colors.length)],left:Math.random()*100+"vw",top:"-10px",zIndex:"9999"});
       document.body.appendChild(d);
-      const f=d.animate([{top:"-10px"},{top:"100vh"}],
-        {duration:3000+Math.random()*2000});
+      const f=d.animate([{top:"-10px"},{top:"100vh"}],{duration:3000+Math.random()*2000});
       f.onfinish=()=>d.remove();
     }
   }
 
   function song(){
-  const audio = new Audio("care.mp3");
-  audio.loop = true;
-  audio.volume = 0;
-  let vol = 0;
-
-  const fadeIn = setInterval(() => {
-    if(vol < 0.5){ vol += 0.02; audio.volume = vol; }
-    else clearInterval(fadeIn);
-  }, 200);
-
-  audio.play().catch(() => {
-    console.log("Autoplay blocked — waiting for click...");
-  });
-
-  document.addEventListener("click", () => {
-    audio.play().catch(() => {});
-  }, { once: true });
-}
-
+    const audio=new Audio("care.mp3");
+    audio.loop=true;audio.volume=0;let vol=0;
+    const fadeIn=setInterval(()=>{if(vol<0.5){vol+=0.02;audio.volume=vol;}else clearInterval(fadeIn);},200);
+    audio.play().catch(()=>{console.log("Autoplay blocked");});
+    document.addEventListener("click",()=>audio.play().catch(()=>{}),{once:true});
+  }
 
   function time(){
     const s=new Date("2024-11-19T00:00:00"),n=new Date(),d=n-s;
@@ -344,11 +304,7 @@ document.querySelectorAll("#mazeControls button").forEach(btn=>{
     document.getElementById("secondsCounter").textContent=Math.floor(d/1000)%60;
   }
 });
-  </script>
+</script>
+
 </body>
 </html>
-
-
-
-
-
