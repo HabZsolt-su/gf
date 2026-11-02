@@ -1,0 +1,26 @@
+{
+  "name": "Our Anniversary Gallery",
+  "short_name": "Anniversary",
+  "description": "Cherish and share our anniversary memories together in real-time.",
+  "id": "anniversary-gallery",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffe4e6",
+  "theme_color": "#ffe4e6",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
